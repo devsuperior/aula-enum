@@ -22,7 +22,7 @@ public class Order implements Serializable {
 	private Instant moment;
 	
 	//@Enumerated(EnumType.STRING)
-	private OrderStatus orderStatus;
+	private Integer orderStatus;
 	
 	public Order() {
 	}
@@ -31,7 +31,7 @@ public class Order implements Serializable {
 		super();
 		this.id = id;
 		this.moment = moment;
-		this.orderStatus = orderStatus;
+		setOrderStatus(orderStatus);
 	}
 
 	public Long getId() {
@@ -51,10 +51,12 @@ public class Order implements Serializable {
 	}
 
 	public OrderStatus getOrderStatus() {
-		return orderStatus;
+		return OrderStatus.valueOf(orderStatus);
 	}
 
 	public void setOrderStatus(OrderStatus orderStatus) {
-		this.orderStatus = orderStatus;
+		if (orderStatus != null) {
+			this.orderStatus = orderStatus.getCode();
+		}
 	}
 }
